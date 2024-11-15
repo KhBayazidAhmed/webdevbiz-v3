@@ -2,6 +2,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/Theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
   title: {
@@ -21,7 +22,7 @@ export default function RootLayout({
     <>
       <html lang="en" suppressHydrationWarning>
         <head />
-        <body>
+        <body className="relative">
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -31,6 +32,7 @@ export default function RootLayout({
             <Header />
             {children}
             <Footer />
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>

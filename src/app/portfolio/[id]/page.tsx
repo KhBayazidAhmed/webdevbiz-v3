@@ -10,47 +10,30 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
-export default function BlockPage() {
-  const project = {
-    id: 1,
-    title: "E-commerce Platform",
-    description: "A full-stack online store with React and Node.js",
-    fullDescription:
-      "This e-commerce platform is a comprehensive solution for businesses looking to establish their online presence. It features a responsive front-end built with React, a robust back-end powered by Node.js and Express, and a MongoDB database for efficient data management.",
-    image: "/placeholder.svg",
-    technologies: [
-      "React",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Redux",
-      "Stripe API",
-    ],
-    features: [
-      "User authentication and authorization",
-      "Product catalog with search and filter functionality",
-      "Shopping cart and wishlist management",
-      "Secure payment processing with Stripe",
-      "Order tracking and history",
-      "Admin dashboard for inventory management",
-    ],
-    challenges: [
-      "Implementing real-time inventory updates across multiple users",
-      "Optimizing database queries for large product catalogs",
-      "Ensuring secure handling of sensitive user data and payment information",
-      "Developing a scalable architecture to handle high traffic loads",
-    ],
-    outcome:
-      "The e-commerce platform was successfully launched, resulting in a 200% increase in online sales for the client within the first three months. The solutions scalability allowed for seamless handling of peak traffic during holiday seasons.",
-    testimonial: {
-      quote:
-        "This e-commerce solution transformed our business. The attention to detail and robust feature set exceeded our expectations.",
-      author: "Jane Doe",
-      position: "CEO, Fashion Emporium",
-    },
-  };
-
+import database from "@/utils/db/appwrite";
+import { ProjectResponseType } from "@/lib/types";
+import { dataBaseID, projectCollectionID } from "@/lib/config";
+export async function generateStaticParams() {
+  const response = await database.listDocuments(
+    dataBaseID,
+    projectCollectionID
+  );
+  const projects = response.documents as unknown as ProjectResponseType[];
+  return projects.map((project) => ({
+    id: project.$id,
+  }));
+}
+export default async function BlockPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const id = (await params).id;
+  const project = (await database.getDocument(
+    dataBaseID,
+    projectCollectionID,
+    id
+  )) as ProjectResponseType;
   return (
     <div className="container mx-auto px-4 py-8">
       <Button asChild variant="ghost" className="mb-4">
@@ -119,8 +102,22 @@ export default function BlockPage() {
         <h2 className="mb-4 text-2xl font-semibold text-primary">Outcome</h2>
         <p>{project.outcome}</p>
       </div>
-
-      <Card className="mb-8">
+      {project.testimonial.map((testimonial) => (
+        <Card key={testimonial.$id} className="mb-8">
+          <CardHeader>
+            <CardTitle>Client Testimonial</CardTitle>
+            <CardDescription>
+              {testimonial.author}, {testimonial.position}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <blockquote className="italic">
+              &quot;{testimonial.quote}&quot;
+            </blockquote>
+          </CardContent>
+        </Card>
+      ))}
+      {/* <Card className="mb-8">
         <CardHeader>
           <CardTitle>Client Testimonial</CardTitle>
           <CardDescription>
@@ -132,7 +129,7 @@ export default function BlockPage() {
             &quot;{project.testimonial.quote}&quot;
           </blockquote>
         </CardContent>
-      </Card>
+      </Card> */}
 
       <div className="flex justify-center">
         <Button asChild size="lg">

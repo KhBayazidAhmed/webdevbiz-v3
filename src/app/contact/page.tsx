@@ -1,5 +1,4 @@
-import dynamic from "next/dynamic";
-const ContactForm = dynamic(() => import("@/components/ContactForm"));
+import ContactForm from "@/components/ContactForm";
 export default function BlockPage() {
   return (
     <div className="container min-h-[90vh] flex justify-center flex-col mx-auto px-4">
