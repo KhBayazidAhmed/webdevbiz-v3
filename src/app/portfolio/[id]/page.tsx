@@ -51,7 +51,8 @@ export default async function BlockPage({
           src={project.image}
           alt={project.title}
           width={400}
-          height={200}
+          height={400}
+          placeholder="blur"
           className="rounded-lg"
         />
       </div>

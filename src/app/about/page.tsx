@@ -22,6 +22,7 @@ export default async function Page() {
           alt="Web developer bayazid"
           width={300}
           height={300}
+          placeholder="blur"
           className="mb-8 rounded-lg md:mb-0 md:mr-8"
         />
         <div>

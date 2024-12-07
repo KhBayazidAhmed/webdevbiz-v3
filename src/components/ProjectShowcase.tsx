@@ -42,7 +42,8 @@ export default async function ProjectShowcase() {
               src={project.image}
               alt={project.title}
               width={300}
-              height={200}
+              height={300}
+              placeholder="blur"
               className="mb-4 rounded-lg"
             />
           </CardContent>

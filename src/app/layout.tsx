@@ -1,9 +1,9 @@
 import "./globals.css";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/Theme-provider";
 import { Toaster } from "@/components/ui/toaster";
-
+import dynamic from "next/dynamic";
+const Header = dynamic(() => import("@/components/Header"));
 export const metadata = {
   title: {
     template: "%s - Web Dev Bayazid",

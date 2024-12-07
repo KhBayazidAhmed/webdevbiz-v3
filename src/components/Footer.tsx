@@ -12,21 +12,21 @@ const Footer = () => {
         </div>
         <div className="flex items-center space-x-4">
           <Link
-            href="https://github.com/yourusername"
+            href="https://github.com/KhBayazidAhmed"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Github className="h-5 w-5" />
           </Link>
           <Link
-            href="https://linkedin.com/in/yourusername"
+            href="https://www.linkedin.com/in/bayazidahmed29/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Linkedin className="h-5 w-5" />
           </Link>
           <Link
-            href="https://twitter.com/yourusername"
+            href="https://x.com/Bayazid30081686"
             target="_blank"
             rel="noopener noreferrer"
           >

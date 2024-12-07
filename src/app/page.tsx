@@ -35,6 +35,7 @@ export default function Page() {
             alt="Your Name"
             width={300}
             height={300}
+            placeholder="blur"
             className="rounded-full"
           />
         </div>
